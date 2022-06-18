@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         projectName:
-          - HDRP2
+          - hdrp
           #projectPath:
           #  - test-project
           #unityVersion:
