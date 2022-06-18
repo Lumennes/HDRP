@@ -119,9 +119,9 @@ jobs:
          password: puxeamduka #Rowdy956
          #local-dir: ./build/
          #server-dir: ./domains/f0666053.xsph.ru/public_html/build2/
-         local-dir: ServerData/ #${{ matrix.targetPlatform }}/
-         server-dir: /domains/f0666053.xsph.ru/public_html/ServerData/  #htdocs/Empty5/build/
-         state-name: ../.ftp-deploy-sync-state.json
+         local-dir: ServerData/${{ matrix.targetPlatform }}/
+         server-dir: /domains/f0666053.xsph.ru/public_html/ServerData/${{ matrix.targetPlatform }}/  #htdocs/Empty5/build/
+         state-name: ../../.ftp-deploy-sync-state.json
          #protocol: ftps
          #port: 21 # todo replace with your web hosts ftps port
          #exclude: |
