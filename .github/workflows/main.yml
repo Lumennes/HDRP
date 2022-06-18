@@ -49,4 +49,8 @@ jobs:
         with:
           name: Build (${{ matrix.targetPlatform }})
           path: build/${{ matrix.targetPlatform }}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ServerData (${{ matrix.targetPlatform }})
+          path: ServerData/${{ matrix.targetPlatform }}
 
