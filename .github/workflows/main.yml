@@ -126,7 +126,10 @@ jobs:
          local-dir: ServerData/
          server-dir: /domains/f0666053.xsph.ru/public_html/ServerData/  #htdocs/Empty5/build/
          state-name: ../.ftp-deploy-sync-state.json
-           
+         exclude: |           
+           **/WebGL/**
+           **/Android/**
+           *.apk*
       
            
            
