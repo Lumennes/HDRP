@@ -1,56 +1,128 @@
-name: Actions 😎
+name: Builds
 
-on: [push, pull_request]
+on:
+  push: { branches: [main] }
+  pull_request:
+    paths-ignore:
+      - '.github/**'
 
 jobs:
-  buildForWindowsBasedPlatforms:
+  buildForAllPlatformsUbuntu:
     name: Build for ${{ matrix.targetPlatform }}
-    runs-on: windows-2019
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        projectPath:
-          - .
-        #unityVersion:
-        #  - 2019.4.1f1
-        #  - 2020.2.1f1
+        projectName:
+          - hdrp
+          #projectPath:
+          #  - test-project
+          #unityVersion:
+          #  - 2019.2.11f1
+          #  - 2019.3.15f1
         targetPlatform:
-        #  - StandaloneWindows # Build a Windows 32-bit standalone.
+          #- StandaloneOSX # Build a macOS standalone (Intel 64-bit).
           - StandaloneWindows64 # Build a Windows 64-bit standalone.
-        #  - tvOS # Build an AppleTV player.
-        #  - WSAPlayer # Build a UWP App.
-
+          #- StandaloneLinux64 # Build a Linux 64-bit standalone.
+          #- iOS # Build an iOS player.
+          #- Android # Build an Android .apk.
+          #- WebGL # WebGL.
+          #          - StandaloneWindows # Build a Windows standalone.
+          #          - WSAPlayer # Build an Windows Store Apps player.
+          #          - PS4 # Build a PS4 Standalone.
+          #          - XboxOne # Build a Xbox One Standalone.
+          #          - tvOS # Build to Apple's tvOS platform.
+          #          - Switch # Build a Nintendo Switch player
     steps:
+    
+      
+    
+      ###########################
+      #         Checkout        #
+      ###########################
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
           lfs: true
+
+      ###########################
+      #          Cache          #
+      ###########################
       - uses: actions/cache@v2
         with:
-          path: ${{ matrix.projectPath }}/Library
-          key:
-            Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-${{
-            hashFiles(matrix.projectPath) }}
+          path: Library
+          key: Library-${{ matrix.projectName }}-ubuntu-${{ matrix.targetPlatform }}
           restore-keys: |
-            Library-${{ matrix.projectPath }}-${{ matrix.targetPlatform }}-
-            Library-${{ matrix.projectPath }}-
+            Library-${{ matrix.projectName }}-ubuntu-
             Library-
+            
+      ###########################
+      #          Build          #
+      ###########################
       - uses: game-ci/unity-builder@v2
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          projectPath: ${{ matrix.projectPath }}
-          unityVersion: ${{ matrix.unityVersion }}
+          #projectPath: ${{ matrix.projectPath }}
+          #unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
-          customParameters: '-myParameter myValue -myBoolean -ThirdParameter andItsValue'
-      - uses: actions/upload-artifact@v2
-        with:
-          name: Build (${{ matrix.targetPlatform }})
-          path: build/${{ matrix.targetPlatform }}
-      - uses: actions/upload-artifact@v2
-        with:
-          name: ServerData (${{ matrix.targetPlatform }})
-          path: ServerData/${{ matrix.targetPlatform }}
+          #customParameters: -profile SomeProfile -someBoolean -someValue exampleValue
+          allowDirtyBuild: true
 
+      ###########################
+      #          Upload         #
+      ###########################
+      #- uses: actions/upload-artifact@v2
+        #with:
+          #name: Build project ${{ matrix.projectName }} (${{ matrix.targetPlatform }})
+          #path: build/${{ matrix.targetPlatform }}
+          #retention-days: 14        
+
+      #- name: Create folder
+        #run: |
+          #mkdir -p zip && cp -R dist zip
+          #ls myNewFolder/MyNewSubFolder
+
+#всё ниже ничего не добавлять не исправлять, ИДЕАЛЬНО, зипы все в свои папки платформ идут, ничего не удаляет не перезаписывает
+#МОЖНО менять только папку куда папки платформ будет переводить, но лучше сделаю её ${{ matrix.projectName }}
+
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%d-%m-%Y_%H:%M')"
+
+      - uses: montudor/action-zip@v1
+        with:
+         args: zip -qq -r build/${{ matrix.projectName }}_${{ matrix.targetPlatform }}_${{ steps.date.outputs.date }}.zip build/${{ matrix.targetPlatform }}/ 
+      
+           
+      - uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+         server: 141.8.193.236 #ftpupload.net
+         username: f0666053 #b7_31775484
+         password: puxeamduka #Rowdy956
+         #local-dir: ./build/
+         #server-dir: ./domains/f0666053.xsph.ru/public_html/build2/
+         local-dir: ServerData/${{ matrix.targetPlatform }}/
+         server-dir: /domains/f0666053.xsph.ru/public_html/ServerData/${{ matrix.targetPlatform }}/  #htdocs/Empty5/build/
+         state-name: ../../.ftp-deploy-sync-state.json
+           
+      - uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+         server: 141.8.193.236 #ftpupload.net
+         username: f0666053 #b7_31775484
+         password: puxeamduka #Rowdy956
+         #local-dir: ./build/
+         #server-dir: ./domains/f0666053.xsph.ru/public_html/build2/
+         local-dir: build/ #${{ matrix.targetPlatform }}/
+         server-dir: /domains/f0666053.xsph.ru/public_html/${{ matrix.projectName }}/${{ matrix.targetPlatform }}/  #htdocs/Empty5/build/
+         state-name: ../.ftp-deploy-sync-state.json
+         #protocol: ftps
+         #port: 21 # todo replace with your web hosts ftps port
+         exclude: |
+           **/StandaloneWindows64/**
+           **/WebGL/**
+           **/Android/**
+           *.apk*
+           
+           
