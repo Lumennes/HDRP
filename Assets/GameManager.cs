@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] TMP_Text qualityText;
     [SerializeField] GameObject media; //sinematic
+#if !UNITY_EDITOR
+    bool fullscreen;
+#endif
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +37,21 @@ public class GameManager : MonoBehaviour
             if (media)
                 media.SetActive(!media.activeSelf);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+#if UNITY_EDITOR
+                UnityEditor.EditorWindow.focusedWindow.maximized = !UnityEditor.EditorWindow.focusedWindow.maximized;
+#else
+                //Screen.fullScreen = !Screen.fullScreen;
+                fullscreen = !fullscreen;
+                if (!fullscreen)
+                    Screen.SetResolution(638, 460, false);
+                else
+                    Screen.SetResolution(1280, 1024, true);
+#endif
+        }
+
     }
 
     void SetQualityLevel(int qualityLevel)

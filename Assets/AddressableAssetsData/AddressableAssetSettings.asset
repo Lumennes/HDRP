@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
+  m_Name: AddressableAssetSettings
+  m_EditorClassIdentifier: 
+  m_DefaultGroup: c01c973b70802ad4bb999e711ccdc1c3
+  m_CachedHash:
+    serializedVersion: 2
+    Hash: 47b40643f1e60f24832ac6ece27898f9
+  m_OptimizeCatalogSize: 0
+  m_BuildRemoteCatalog: 1
+  m_BundleLocalCatalog: 0
+  m_CatalogRequestsTimeout: 0
+  m_DisableCatalogUpdateOnStart: 0
+  m_IgnoreUnsupportedFilesInBuild: 0
+  m_UniqueBundleIds: 0
+  m_NonRecursiveBuilding: 1
+  m_CCDEnabled: 0
+  m_maxConcurrentWebRequests: 3
+  m_ContiguousBundles: 1
+  m_StripUnityVersionFromBundleBuild: 0
+  m_DisableVisibleSubAssetRepresentations: 0
+  m_ShaderBundleNaming: 0
+  m_ShaderBundleCustomNaming: 
+  m_MonoScriptBundleNaming: 0
+  m_CheckForContentUpdateRestrictionsOption: 0
+  m_MonoScriptBundleCustomNaming: 
+  m_RemoteCatalogBuildPath:
+    m_Id: 375c9a0c86e8ecf41ab2f2eda04b8c8d
+  m_RemoteCatalogLoadPath:
+    m_Id: 29415e1f982b97b40b5a2dd22d5f36c8
+  m_ContentStateBuildPathProfileVariableName: <default settings path>
+  m_CustomContentStateBuildPath: 
+  m_ContentStateBuildPath: 
+  m_BuildAddressablesWithPlayerBuild: 0
+  m_overridePlayerVersion: 
+  m_GroupAssets:
+  - {fileID: 11400000, guid: 447d8de4f1e15a5449840d834ec249bd, type: 2}
+  - {fileID: 11400000, guid: e1b4d62b60bf8834989120f0fd6e26b2, type: 2}
+  m_BuildSettings:
+    m_CompileScriptsInVirtualMode: 0
+    m_CleanupStreamingAssetsAfterBuilds: 1
+    m_LogResourceManagerExceptions: 1
+    m_BundleBuildPath: Temp/com.unity.addressables/AssetBundles
+  m_ProfileSettings:
+    m_Profiles:
+    - m_InheritedParent: 
+      m_Id: b5090bf72437e914da109b6b636325c8
+      m_ProfileName: Default
+      m_Values:
+      - m_Id: adde8b1c16cbd9246af6d566d5cf11d6
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: e274e165d07fc2a4eaa9589098a1b263
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: e3cc43e9adc9fc14c8cdb62a258e1021
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 375c9a0c86e8ecf41ab2f2eda04b8c8d
+        m_Value: ServerData/[BuildTarget]
+      - m_Id: 29415e1f982b97b40b5a2dd22d5f36c8
+        m_Value: http://www.f0666053.xsph.ru/ServerData/[BuildTarget]
+    - m_InheritedParent: 
+      m_Id: 0abc853368e16d94c87b2e0cd3d06f85
+      m_ProfileName: localhost
+      m_Values:
+      - m_Id: adde8b1c16cbd9246af6d566d5cf11d6
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: e274e165d07fc2a4eaa9589098a1b263
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: e3cc43e9adc9fc14c8cdb62a258e1021
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 375c9a0c86e8ecf41ab2f2eda04b8c8d
+        m_Value: C:/xampp/htdocs/ServerData/[BuildTarget]
+      - m_Id: 29415e1f982b97b40b5a2dd22d5f36c8
+        m_Value: http://localhost/ServerData/[BuildTarget]
+    - m_InheritedParent: 
+      m_Id: 532ee5f0f4dd80e4eb76fb91ff7284a0
+      m_ProfileName: byethost7
+      m_Values:
+      - m_Id: adde8b1c16cbd9246af6d566d5cf11d6
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: e274e165d07fc2a4eaa9589098a1b263
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: e3cc43e9adc9fc14c8cdb62a258e1021
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 375c9a0c86e8ecf41ab2f2eda04b8c8d
+        m_Value: ServerData/[BuildTarget]
+      - m_Id: 29415e1f982b97b40b5a2dd22d5f36c8
+        m_Value: http://www.lumennes.byethost7.com/ServerData/[BuildTarget]
+    - m_InheritedParent: 
+      m_Id: 7d42b6999061f304bb17b48e26925991
+      m_ProfileName: hostingem
+      m_Values:
+      - m_Id: adde8b1c16cbd9246af6d566d5cf11d6
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: e274e165d07fc2a4eaa9589098a1b263
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: e3cc43e9adc9fc14c8cdb62a258e1021
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 375c9a0c86e8ecf41ab2f2eda04b8c8d
+        m_Value: ServerData/[BuildTarget]
+      - m_Id: 29415e1f982b97b40b5a2dd22d5f36c8
+        m_Value: http://www.lumennes.hostingem.ru/ServerData/[BuildTarget]
+    m_ProfileEntryNames:
+    - m_Id: adde8b1c16cbd9246af6d566d5cf11d6
+      m_Name: BuildTarget
+      m_InlineUsage: 0
+    - m_Id: e274e165d07fc2a4eaa9589098a1b263
+      m_Name: Local.BuildPath
+      m_InlineUsage: 0
+    - m_Id: e3cc43e9adc9fc14c8cdb62a258e1021
+      m_Name: Local.LoadPath
+      m_InlineUsage: 0
+    - m_Id: 375c9a0c86e8ecf41ab2f2eda04b8c8d
+      m_Name: Remote.BuildPath
+      m_InlineUsage: 0
+    - m_Id: 29415e1f982b97b40b5a2dd22d5f36c8
+      m_Name: Remote.LoadPath
+      m_InlineUsage: 0
+    m_ProfileVersion: 1
+  m_LabelTable:
+    m_LabelNames:
+    - default
+  m_SchemaTemplates: []
+  m_GroupTemplateObjects:
+  - {fileID: 11400000, guid: 865f22a1713673842aecfafcf5dd4235, type: 2}
+  m_InitializationObjects: []
+  m_CertificateHandlerType:
+    m_AssemblyName: 
+    m_ClassName: 
+  m_ActivePlayerDataBuilderIndex: 3
+  m_DataBuilders:
+  - {fileID: 11400000, guid: aa7ea565d544cd244bf4796ede60ca79, type: 2}
+  - {fileID: 11400000, guid: 257d7678cd9722f45a6dea7e35218b3e, type: 2}
+  - {fileID: 11400000, guid: ee23c4d7cd57f70418e82f8a2057b1f9, type: 2}
+  - {fileID: 11400000, guid: 85ff0923147814a4fbf3701173a0b021, type: 2}
+  m_ActiveProfileId: b5090bf72437e914da109b6b636325c8
+  m_HostingServicesManager:
+    m_HostingServiceInfos: []
+    m_Settings: {fileID: 11400000}
+    m_NextInstanceId: 0
+    m_RegisteredServiceTypeRefs: []
