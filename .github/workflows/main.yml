@@ -17,12 +17,11 @@ jobs:
       fail-fast: false
       matrix:
         projectName:
-          - hdrp
+          - HDRP
           #projectPath:
-          #  - test-project
+          #  - .
           #unityVersion:
-          #  - 2019.2.11f1
-          #  - 2019.3.15f1
+          #  - 2022.1.4f1
         targetPlatform:
           #- StandaloneOSX # Build a macOS standalone (Intel 64-bit).
           - StandaloneWindows64 # Build a Windows 64-bit standalone.
@@ -36,20 +35,11 @@ jobs:
           #          - XboxOne # Build a Xbox One Standalone.
           #          - tvOS # Build to Apple's tvOS platform.
           #          - Switch # Build a Nintendo Switch player
-    steps:
-    
-      
-    
-      ###########################
-      #         Checkout        #
-      ###########################
+    steps:    
       - uses: actions/checkout@v2
         with:
           lfs: true
-
-      ###########################
-      #          Cache          #
-      ###########################
+          
       - uses: actions/cache@v2
         with:
           path: Library
@@ -58,37 +48,10 @@ jobs:
             Library-${{ matrix.projectName }}-ubuntu-
             Library-
             
-      ###########################
-      #          Build          #
-      ###########################
       - uses: game-ci/unity-builder@v2
-        #env:
-          #UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          #UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          #UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
-          #projectPath: ${{ matrix.projectPath }}
-          #unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
-          #customParameters: -profile SomeProfile -someBoolean -someValue exampleValue
           allowDirtyBuild: true
-
-      ###########################
-      #          Upload         #
-      ###########################
-      #- uses: actions/upload-artifact@v2
-        #with:
-          #name: Build project ${{ matrix.projectName }} (${{ matrix.targetPlatform }})
-          #path: build/${{ matrix.targetPlatform }}
-          #retention-days: 14        
-
-      #- name: Create folder
-        #run: |
-          #mkdir -p zip && cp -R dist zip
-          #ls myNewFolder/MyNewSubFolder
-
-#всё ниже ничего не добавлять не исправлять, ИДЕАЛЬНО, зипы все в свои папки платформ идут, ничего не удаляет не перезаписывает
-#МОЖНО менять только папку куда папки платформ будет переводить, но лучше сделаю её ${{ matrix.projectName }}
 
       - name: Get current date
         id: date
@@ -100,36 +63,21 @@ jobs:
          
       - uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-         server: 141.8.193.236 #ftpupload.net
-         username: f0666053 #b7_31775484
-         password: puxeamduka #Rowdy956
-         #local-dir: ./build/
-         #server-dir: ./domains/f0666053.xsph.ru/public_html/build2/
-         local-dir: build/ #${{ matrix.targetPlatform }}/
-         server-dir: /domains/f0666053.xsph.ru/public_html/${{ matrix.projectName }}/${{ matrix.targetPlatform }}/  #htdocs/Empty5/build/
+         server: ${{ secrets.FTP_SERVER }}
+         username: ${{ secrets.FTP_USERNAME }}
+         password: ${{ secrets.FTP_PASSWORD }}
+         local-dir: build/
+         server-dir: /domains/${{ secrets.SITE }}/public_html/${{ matrix.projectName }}/${{ matrix.targetPlatform }}/ 
          state-name: ../.ftp-deploy-sync-state.json
-         #protocol: ftps
-         #port: 21 # todo replace with your web hosts ftps port
          exclude: |
            **/StandaloneWindows64/**
-           **/WebGL/**
-           **/Android/**
-           *.apk*
            
       - uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-         server: 141.8.193.236 #ftpupload.net
-         username: f0666053 #b7_31775484
-         password: puxeamduka #Rowdy956
-         #local-dir: ./build/
-         #server-dir: ./domains/f0666053.xsph.ru/public_html/build2/
+         server: ${{ secrets.FTP_SERVER }}
+         username: ${{ secrets.FTP_USERNAME }}
+         password: ${{ secrets.FTP_PASSWORD }}
          local-dir: ServerData/
-         server-dir: /domains/f0666053.xsph.ru/public_html/ServerData/  #htdocs/Empty5/build/
+         server-dir: /domains/${{ secrets.SITE }}/public_html/ServerData/
          state-name: ../.ftp-deploy-sync-state.json
-         exclude: |           
-           **/WebGL/**
-           **/Android/**
-           *.apk*
-      
-           
            
